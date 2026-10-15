@@ -31,9 +31,14 @@ class Rule(StrictModel):
     
     @model_validator(mode="after")
     def valid_tree(self):
-        # course rules require a course code
-        if self.kind == "course" and not self.rules:
-            raise ValueError("AND/OR rules need childre")
+        # Course rules require a course code
+        if self.kind == "course" and not self.course:
+            raise ValueError("Course rules require a course code")
+
+        # AND/OR rules require at least one child rule
+        if self.kind in {"all", "any"} and not self.rules:
+            raise ValueError("AND/OR rules need children")
+
         return self
 
 # represents a scheduled class meeting

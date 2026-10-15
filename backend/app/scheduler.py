@@ -2,7 +2,7 @@ from datetime import timedelta
 from itertools import combinations
 from time import perf_counter
 
-from schemas import Meeting, Preferences, Section
+from .schemas import Meeting, Preferences, Section
 
 # maximum number of section candidates the search can explore
 MAX_NODES = 100_000
